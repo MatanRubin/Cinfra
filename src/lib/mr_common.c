@@ -1,4 +1,6 @@
-//
-// Created by Matan Rubin on 10/07/16.
-//
+#include <stdlib.h>
+#include "mr_common.h"
 
+void mr_panic() {
+    abort();
+}

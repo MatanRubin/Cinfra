@@ -2,17 +2,19 @@
 #include "mr_common.h"
 #include "mr_mutex.h"
 
-void mr_mutex_init(mr_mutex_t *mtx) {
+void mr_mutex_init(mr_mutex_t *mtx, const char *name) {
 	int err;
 
 	if (mtx->magic == MR_MUTEX_MAGIC) {
 		mr_panic();
 	}
 
-	err = pthread_mutex_init(&mtx->mtx);
+	err = pthread_mutex_init(&mtx->mtx, PTHREAD_MUTEX_DEFAULT);
 	if (err) {
 		mr_panic();
 	}
+
+	mtx->name = name ? name : "";
 	mtx->magic = MR_MUTEX_MAGIC;
 }
 
